@@ -1,3 +1,5 @@
+import java.io.*;
+
 /**
  * @author MRFF
  * @create 2021-10-22 21:17
@@ -20,13 +22,52 @@ public class Test {
 ////        p.start();
 ////        c.start();
 
-        StringBuilder sb = new StringBuilder("Hello");
-        String s = "Hello";
-        System.out.println(s);
-        System.out.println("Branch");
+        //branch
+//        DataOutputStream dataOutputStream = null;
+//        try {
+//            File file = new File("data.txt");
+//            FileOutputStream fileOutputStream = new FileOutputStream(file);
+//            BufferedOutputStream bufferedOutputStream = new BufferedOutputStream(fileOutputStream);
+//            dataOutputStream = new DataOutputStream(bufferedOutputStream);
+//
+//            dataOutputStream.writeInt(123);
+//            dataOutputStream.writeUTF("你好");
+//            dataOutputStream.writeBoolean(true);
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        } finally {
+//            try {
+//                if (dataOutputStream != null) dataOutputStream.close();
+//            } catch (IOException e) {
+//                e.printStackTrace();
+//            }
+//        }
+        DataInputStream dataInputStream = null;
+        try {
+            File file = new File("data.txt");
+            FileInputStream fileInputStream = new FileInputStream(file);
+            BufferedInputStream bufferedInputStream = new BufferedInputStream(fileInputStream);
+            dataInputStream = new DataInputStream(bufferedInputStream);
 
+            int i = dataInputStream.readInt();
+            String s = dataInputStream.readUTF();
+            boolean b = dataInputStream.readBoolean();
+
+            System.out.println(i);
+            System.out.println(s);
+            System.out.println(b);
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if(dataInputStream!=null)dataInputStream.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
 
     }
+
 
 //    public static void method1()
 //    {
