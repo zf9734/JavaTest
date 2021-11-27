@@ -1,3 +1,7 @@
+
+
+import java.io.*;
+
 /**
  * @author MRFF
  * @create 2021-10-22 21:17
@@ -20,10 +24,47 @@ public class Test {
 ////        p.start();
 ////        c.start();
 
-        StringBuilder sb = new StringBuilder("Hello");
-        String s = "Hello";
-        System.out.println(s);
-        System.out.println("Master");
+        //master分支
+        File src = new File("text.txt");
+        File target = new File("tartget.txt");
+        InputStreamReader inputStreamReader = null;
+        OutputStreamWriter outputStreamWriter = null;
+        try {
+            FileInputStream fileInputStream = new FileInputStream(src);
+            FileOutputStream fileOutputStream = new FileOutputStream(target);
+            inputStreamReader = new InputStreamReader(fileInputStream,"UTF-8");
+            outputStreamWriter = new OutputStreamWriter(fileOutputStream,"GBK");
+
+            char[] temp = new char[5];
+            int length = -1;
+            while((length = inputStreamReader.read(temp))!=-1)
+            {
+                System.out.println(new String(temp,0,length));
+                outputStreamWriter.write(temp,0,length);
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            if(inputStreamReader!=null)
+            {
+                try {
+                    inputStreamReader.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+
+            }
+            if(outputStreamWriter!=null)
+            {
+                try {
+                    outputStreamWriter.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+
+            }
+        }
+
 
 
 
