@@ -1,7 +1,5 @@
 
 
-import java.io.*;
-
 /**
  * @author MRFF
  * @create 2021-10-22 21:17
@@ -25,47 +23,59 @@ public class Test {
 ////        c.start();
 
         //master分支
-        File src = new File("text.txt");
-        File target = new File("tartget.txt");
-        InputStreamReader inputStreamReader = null;
-        OutputStreamWriter outputStreamWriter = null;
-        try {
-            FileInputStream fileInputStream = new FileInputStream(src);
-            FileOutputStream fileOutputStream = new FileOutputStream(target);
-            inputStreamReader = new InputStreamReader(fileInputStream,"UTF-8");
-            outputStreamWriter = new OutputStreamWriter(fileOutputStream,"GBK");
-
-            char[] temp = new char[5];
-            int length = -1;
-            while((length = inputStreamReader.read(temp))!=-1)
-            {
-                System.out.println(new String(temp,0,length));
-                outputStreamWriter.write(temp,0,length);
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        } finally {
-            if(inputStreamReader!=null)
-            {
-                try {
-                    inputStreamReader.close();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-
-            }
-            if(outputStreamWriter!=null)
-            {
-                try {
-                    outputStreamWriter.close();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-
-            }
-        }
-
-
+        //用RandomAccess实现插入操作
+//        RandomAccessFile reader = null;
+//        RandomAccessFile writer = null;
+//        try {
+//            reader = new RandomAccessFile("src.txt","r");
+//            writer = new RandomAccessFile("src.txt","rw");
+//            ArrayList<Byte> arrayList = new ArrayList<Byte>();
+//            byte[] b = new byte[5];
+//            int length = -1;
+//            //把插入点后面的字符串读入到arraylist中
+//            reader.seek(3);
+//            while((length = reader.read(b))!=-1)
+//            {
+//                for (int i = 0; i < length; i++) {
+//                    arrayList.add(b[i]);
+//                }
+//            }
+//            //开始写入xyz
+//            writer.seek(3);
+//            writer.write("xyz".getBytes());
+//            //开始追加之前存的字符串
+//            byte[] b2 = new byte[arrayList.size()];
+//            Iterator<Byte> iterator = arrayList.iterator();
+//            int p =0;
+//            while(iterator.hasNext())
+//            {
+//                b2[p] = iterator.next();
+//                p++;
+//            }
+//            writer.write(b2);
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        } finally {
+//            //关闭
+//            if(reader!=null)
+//            {
+//                try {
+//                    reader.close();
+//                } catch (IOException e) {
+//                    e.printStackTrace();
+//                }
+//
+//            }
+//            if(writer!=null)
+//            {
+//                try {
+//                    writer.close();
+//                } catch (IOException e) {
+//                    e.printStackTrace();
+//                }
+//
+//            }
+//        }
 
 
     }
