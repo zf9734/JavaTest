@@ -1,10 +1,10 @@
-
 import org.junit.Test;
 
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
-import java.net.DatagramPacket;
-import java.net.DatagramSocket;
-import java.net.InetAddress;
+import java.io.InputStream;
+import java.net.HttpURLConnection;
+import java.net.URL;
 
 /**
  * @author MRFF
@@ -12,46 +12,57 @@ import java.net.InetAddress;
  */
 public class TestTest {
     @Test
-    public void sender()
+    public void urlTest()
     {
-        DatagramSocket datagramSocket = null;
+        HttpURLConnection urlConnection = null;
+        InputStream inputStream = null;
+        ByteArrayOutputStream byteArrayOutputStream = null;
         try {
-            datagramSocket = new DatagramSocket();
-            String s = "我是用UDP方式发送的导弹！";
-            DatagramPacket datagramPacket = new DatagramPacket(s.getBytes(),0,s.getBytes().length, InetAddress.getByName("127.0.0.1"),9987);
-            datagramSocket.send(datagramPacket);
+            URL url = new URL("http://localhost:8080/examples/test.txt");
+            urlConnection = (HttpURLConnection) url.openConnection();
+            urlConnection.connect();
+            inputStream = urlConnection.getInputStream();
+
+            int length = -1;
+            byte[] temp = new byte[5];
+            byteArrayOutputStream = new ByteArrayOutputStream();
+            while((length = inputStream.read(temp))!=-1)
+            {
+                byteArrayOutputStream.write(temp,0,length);
+            }
+            byteArrayOutputStream.flush();
+
+            System.out.println(byteArrayOutputStream.toString());
         } catch (IOException e) {
             e.printStackTrace();
         } finally {
-            if(datagramSocket!=null)
+            if(byteArrayOutputStream!=null)
             {
 
-                datagramSocket.close();
+                try {
+                    byteArrayOutputStream.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
             }
-        }
-    }
-
-    @Test
-    public void receiver()
-    {
-        DatagramSocket datagramSocket = null;
-        try {
-            datagramSocket = new DatagramSocket(9987);
-            byte[] temp = new byte[100];
-            DatagramPacket datagramPacket = new DatagramPacket(temp,0,temp.length);
-            datagramSocket.receive(datagramPacket);
-            System.out.println(new String(datagramPacket.getData(),0,datagramPacket.getLength()));
-        } catch (IOException e) {
-            e.printStackTrace();
-        } finally {
-            if(datagramSocket!=null)
+            if(inputStream!=null)
             {
 
-                datagramSocket.close();
+                try {
+                    inputStream.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+            if(urlConnection!=null)
+            {
+
+                urlConnection.disconnect();
             }
         }
 
     }
+
 
 
 
