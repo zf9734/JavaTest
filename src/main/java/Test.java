@@ -1,4 +1,4 @@
-import java.io.*;
+
 
 /**
  * @author MRFF
@@ -42,31 +42,36 @@ public class Test {
 //                e.printStackTrace();
 //            }
 //        }
-        DataInputStream dataInputStream = null;
-        try {
-            File file = new File("data.txt");
-            FileInputStream fileInputStream = new FileInputStream(file);
-            BufferedInputStream bufferedInputStream = new BufferedInputStream(fileInputStream);
-            dataInputStream = new DataInputStream(bufferedInputStream);
-
-            int i = dataInputStream.readInt();
-            String s = dataInputStream.readUTF();
-            boolean b = dataInputStream.readBoolean();
-
-            System.out.println(i);
-            System.out.println(s);
-            System.out.println(b);
-        } catch (IOException e) {
-            e.printStackTrace();
-        } finally {
-            try {
-                if(dataInputStream!=null)dataInputStream.close();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
+//        DataInputStream dataInputStream = null;
+//        try {
+//            File file = new File("data.txt");
+//            FileInputStream fileInputStream = new FileInputStream(file);
+//            BufferedInputStream bufferedInputStream = new BufferedInputStream(fileInputStream);
+//            dataInputStream = new DataInputStream(bufferedInputStream);
+//
+//            int i = dataInputStream.readInt();
+//            String s = dataInputStream.readUTF();
+//            boolean b = dataInputStream.readBoolean();
+//
+//            System.out.println(i);
+//            System.out.println(s);
+//            System.out.println(b);
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        } finally {
+//            try {
+//                if(dataInputStream!=null)dataInputStream.close();
+//            } catch (IOException e) {
+//                e.printStackTrace();
+//            }
+//        }
+        //TCP例题2
 
     }
+
+
+
+
 
 
 //    public static void method1()
