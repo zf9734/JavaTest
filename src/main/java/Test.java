@@ -4,9 +4,10 @@
  * @author MRFF
  * @create 2021-10-22 21:17
  */
+
 public class Test {
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws Exception {
 
 //        //试除法
 //        method1();
@@ -76,6 +77,10 @@ public class Test {
 //
 //            }
 //        }
+
+
+
+
 
 
     }
